@@ -50,3 +50,40 @@ function longestWord(someString) {
 
 //console.log(longestWord("shorter longerrrrr")); //longerrrrr
 
+function totalVowels(prev, curr){
+    var vowels = ["a","e","i","o","u"];
+    if (typeof curr === "string" && vowels.indexOf(curr) !== -1) {
+        prev.push(curr);
+    }
+    return prev;
+}
+
+function countVowels(someString){
+    var splitString = someString.split("");
+    return splitString.reduce(totalVowels, []).length;
+}
+
+//console.log(countVowels("how many vowels now? 5")); //5
+
+//6: take an array of numbers, return object with hightest and lowest numbers
+
+function isHighestLowest(prev, curr, index){
+    if (curr > prev.highest){
+        prev.highest = curr;
+        return prev;
+    } else if (curr < prev.lowest) {
+        prev.lowest = curr;
+        return prev;
+    }
+    return prev;
+}
+
+function highLow(someArray){
+    var highLowObj = {
+        highest: -Infinity,
+        lowest: Infinity
+    }
+    return someArray.reduce(isHighestLowest, highLowObj);
+}
+
+console.log(highLow([6, 34, 2453, -3, -2348]));
