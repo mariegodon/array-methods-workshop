@@ -50,15 +50,15 @@ function longestWord(someString) {
 
 //console.log(longestWord("shorter longerrrrr")); //longerrrrr
 
-function totalVowels(prev, curr){
-    var vowels = ["a","e","i","o","u"];
+function totalVowels(prev, curr) {
+    var vowels = ["a", "e", "i", "o", "u"];
     if (typeof curr === "string" && vowels.indexOf(curr) !== -1) {
         prev.push(curr);
     }
     return prev;
 }
 
-function countVowels(someString){
+function countVowels(someString) {
     var splitString = someString.split("");
     return splitString.reduce(totalVowels, []).length;
 }
@@ -67,18 +67,19 @@ function countVowels(someString){
 
 //6: take an array of numbers, return object with hightest and lowest numbers
 
-function isHighestLowest(prev, curr, index){
-    if (curr > prev.highest){
+function isHighestLowest(prev, curr) {
+    if (curr > prev.highest) {
         prev.highest = curr;
         return prev;
-    } else if (curr < prev.lowest) {
+    }
+    else if (curr < prev.lowest) {
         prev.lowest = curr;
         return prev;
     }
     return prev;
 }
 
-function highLow(someArray){
+function highLow(someArray) {
     var highLowObj = {
         highest: -Infinity,
         lowest: Infinity
@@ -86,4 +87,131 @@ function highLow(someArray){
     return someArray.reduce(isHighestLowest, highLowObj);
 }
 
-console.log(highLow([6, 34, 2453, -3, -2348]));
+//console.log(highLow([6, 34, 2453, -3, -2348])); //{ highest: 2453, lowest: -2348 }
+
+//7: similar to 6, take two highest numbers and two lowest numbers
+
+function isHighestLowestTwo(prev, curr) {
+    if (curr > prev.secondHighest) {
+        if (curr > prev.highest) {
+            prev.secondHighest = prev.highest;
+            prev.highest = curr;
+            return prev;
+        }
+        else if (curr === prev.highest) {
+            prev.secondHighest = curr;
+            return prev;
+        }
+        else {
+            prev.secondHighest = curr;
+            return prev;
+        }
+    }
+    else if (curr < prev.secondLowest) {
+        if (curr < prev.lowest) {
+            prev.secondLowest = prev.lowest;
+            prev.lowest = curr;
+            return prev;
+        }
+        else if (curr === prev.lowest) {
+            prev.secondLowest = curr;
+            return prev;
+        }
+        else {
+            prev.secondLowest = curr;
+            return prev;
+        }
+    }
+
+    return prev;
+}
+
+function highLowTwo(someArray) {
+    var highLowTwoObj = {
+        highest: -Infinity,
+        secondHighest: -Infinity,
+        lowest: Infinity,
+        secondLowest: Infinity
+    }
+    return someArray.reduce(isHighestLowestTwo, highLowTwoObj);
+}
+
+//console.log(highLowTwo([6, 34, 35, 36, 36, -65, 2454, 2453, -2348, 2454, -3, -2348, -65, 234]));
+
+//8: take a string, return object where keys are letters
+//values are number of times letter appears
+
+function isUnique(repeated) {
+    var unique = [];
+    repeated.forEach(function(char) {
+        if (unique.indexOf(char) === -1) {
+            unique.push(char);
+        }
+    });
+    return unique;
+}
+
+function letterCounter(prev, curr) {
+    var oldCount = prev[curr];
+    var newCount = oldCount + 1;
+    prev[curr] = newCount;
+    return prev;
+}
+
+function countChars(anyString) {
+    var arrayOfLetters = anyString.replace(/\s+/g, '').split("");
+    var uniqueStringArray = isUnique(arrayOfLetters);
+    var objectCounter = {};
+    uniqueStringArray.forEach(function(uniqueChar) {
+        objectCounter[uniqueChar] = 0;
+    });
+
+    return arrayOfLetters.reduce(letterCounter, objectCounter);
+
+}
+
+//console.log(countChars("hello world"));
+
+//9: take a database of people, return an object with 
+//unique id as identifier, data as properties
+
+function idReducer(prev, curr) {
+    prev[curr["id"]] = curr;
+    return prev;
+    
+}
+
+function peopleById(peopleArray){
+    
+    return peopleArray.reduce(idReducer, {});
+    
+}
+
+var exampleDatabase = [
+  {
+    "id": "KeXoYg92is",
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "john@smith.com"
+  },
+  {
+    "id": "NkALmSWtUp",
+    "firstName": "Donald",
+    "lastName": "Duck",
+    "email": "don@disney.com"
+  },
+  {
+    "id": "m7LPbJYSUg",
+    "firstName": "John",
+    "lastName": "Vader",
+    "email": "vader@darkside.com"
+  }
+];
+
+//console.log(peopleById(exampleDatabase));
+
+
+
+function peopleByFirstName() {
+    
+}
