@@ -178,40 +178,55 @@ function countChars(anyString) {
 function idReducer(prev, curr) {
     prev[curr["id"]] = curr;
     return prev;
-    
+
 }
 
-function peopleById(peopleArray){
-    
+function peopleById(peopleArray) {
+
     return peopleArray.reduce(idReducer, {});
-    
+
 }
 
-var exampleDatabase = [
-  {
+var exampleDatabase = [{
     "id": "KeXoYg92is",
     "firstName": "John",
     "lastName": "Smith",
     "email": "john@smith.com"
-  },
-  {
+}, {
     "id": "NkALmSWtUp",
     "firstName": "Donald",
     "lastName": "Duck",
     "email": "don@disney.com"
-  },
-  {
+}, {
     "id": "m7LPbJYSUg",
     "firstName": "John",
     "lastName": "Vader",
     "email": "vader@darkside.com"
-  }
-];
+}];
 
 //console.log(peopleById(exampleDatabase));
+function nameReducer(firstNameIndex, currPerson) {
+    if (!firstNameIndex[currPerson.firstName]) {
+        firstNameIndex[currPerson.firstName] = [];
+        firstNameIndex[currPerson.firstName].push(currPerson);
+    }
+    else {
+        for (var key in firstNameIndex) {
+            if (currPerson.firstName === key) {
+                firstNameIndex[key].push(currPerson);
+            }
 
-
-
-function peopleByFirstName() {
-    
+        }
+    }
+    return firstNameIndex;
 }
+
+
+
+function peopleByFirstName(peopleArray) {
+
+    return peopleArray.reduce(nameReducer, {});
+
+}
+
+//console.log(peopleByFirstName(exampleDatabase));
