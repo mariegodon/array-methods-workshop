@@ -96,30 +96,24 @@ function isHighestLowestTwo(prev, curr) {
         if (curr > prev.highest) {
             prev.secondHighest = prev.highest;
             prev.highest = curr;
-            return prev;
         }
         else if (curr === prev.highest) {
             prev.secondHighest = curr;
-            return prev;
         }
         else {
             prev.secondHighest = curr;
-            return prev;
         }
     }
     else if (curr < prev.secondLowest) {
         if (curr < prev.lowest) {
             prev.secondLowest = prev.lowest;
             prev.lowest = curr;
-            return prev;
         }
         else if (curr === prev.lowest) {
             prev.secondLowest = curr;
-            return prev;
         }
         else {
             prev.secondLowest = curr;
-            return prev;
         }
     }
 
@@ -230,3 +224,62 @@ function peopleByFirstName(peopleArray) {
 }
 
 //console.log(peopleByFirstName(exampleDatabase));
+
+//create a function that takes a number and 
+//print all the prime numbers up to that number 
+
+//another function add all the prime numbers up to that number
+//AND the number
+function allNumbersBefore(num) {
+    var numArray = [];
+    while (num > 0) {
+        numArray.push(num);
+        num--;
+    }
+    return numArray;
+}
+
+function primeFactorization(integer) {
+    var originalInteger = integer;
+    var factors = [];
+    for (var i = 2; i <= integer; i++) {
+        while (integer % i === 0) {
+            factors.push(i);
+            integer /= i;
+        }
+    }
+    if (originalInteger === 2) {
+        return false;
+    } else if (factors.length === 1) {
+        return true;
+    }
+    else return false;
+}
+
+function rollingSum(array){
+    var i = 0;
+    var sum = 0;
+    while(i < array.length) {
+        sum += array[i];
+        i++;
+    }
+    return sum;
+}
+
+function printAllPrimes(number){
+    var allNumbers = allNumbersBefore(number);
+    return allNumbers.filter(primeFactorization);
+    
+}
+
+function addAllPrimesPlusSelf(number){
+    var allNumbers = allNumbersBefore(number);
+    var array = allNumbers.filter(primeFactorization);
+    return rollingSum(array) + number;
+}
+
+console.log(printAllPrimes(13));
+console.log(addAllPrimesPlusSelf(13));
+
+
+
