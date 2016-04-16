@@ -93,25 +93,20 @@ function highLow(someArray) {
 
 function isHighestLowestTwo(prev, curr) {
     if (curr > prev.secondHighest) {
-        if (curr > prev.highest) {
+        if (curr >= prev.highest) {
             prev.secondHighest = prev.highest;
             prev.highest = curr;
-        }
-        else if (curr === prev.highest) {
-            prev.secondHighest = curr;
         }
         else {
             prev.secondHighest = curr;
         }
     }
     else if (curr < prev.secondLowest) {
-        if (curr < prev.lowest) {
+        if (curr <= prev.lowest) {
             prev.secondLowest = prev.lowest;
             prev.lowest = curr;
         }
-        else if (curr === prev.lowest) {
-            prev.secondLowest = curr;
-        }
+
         else {
             prev.secondLowest = curr;
         }
@@ -130,7 +125,7 @@ function highLowTwo(someArray) {
     return someArray.reduce(isHighestLowestTwo, highLowTwoObj);
 }
 
-//console.log(highLowTwo([6, 34, 35, 36, 36, -65, 2454, 2453, -2348, 2454, -3, -2348, -65, 234]));
+console.log(highLowTwo([6, 34, 35, 36, 36, -65, 2453, -2348, 2454, -3, -2348, -65, 234]));
 
 //8: take a string, return object where keys are letters
 //values are number of times letter appears
@@ -250,36 +245,34 @@ function primeFactorization(integer) {
     }
     if (originalInteger === 2) {
         return false;
-    } else if (factors.length === 1) {
+    }
+    else if (factors.length === 1) {
         return true;
     }
     else return false;
 }
 
-function rollingSum(array){
+function rollingSum(array) {
     var i = 0;
     var sum = 0;
-    while(i < array.length) {
+    while (i < array.length) {
         sum += array[i];
         i++;
     }
     return sum;
 }
 
-function printAllPrimes(number){
+function printAllPrimes(number) {
     var allNumbers = allNumbersBefore(number);
     return allNumbers.filter(primeFactorization);
-    
+
 }
 
-function addAllPrimesPlusSelf(number){
+function addAllPrimesPlusSelf(number) {
     var allNumbers = allNumbersBefore(number);
     var array = allNumbers.filter(primeFactorization);
     return rollingSum(array) + number;
 }
 
-console.log(printAllPrimes(13));
-console.log(addAllPrimesPlusSelf(13));
-
-
-
+//console.log(printAllPrimes(67));
+//console.log(addAllPrimesPlusSelf(13));
