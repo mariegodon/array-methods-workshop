@@ -125,7 +125,7 @@ function highLowTwo(someArray) {
     return someArray.reduce(isHighestLowestTwo, highLowTwoObj);
 }
 
-console.log(highLowTwo([6, 34, 35, 36, 36, -65, 2453, -2348, 2454, -3, -2348, -65, 234]));
+//console.log(highLowTwo([6, 34, 35, 36, 36, -65, 2453, -2348, 2454, -3, -2348, -65, 234]));
 
 //8: take a string, return object where keys are letters
 //values are number of times letter appears
@@ -252,14 +252,8 @@ function primeFactorization(integer) {
     else return false;
 }
 
-function rollingSum(array) {
-    var i = 0;
-    var sum = 0;
-    while (i < array.length) {
-        sum += array[i];
-        i++;
-    }
-    return sum;
+function sum(rollingSum, curr) {
+    return rollingSum + curr;
 }
 
 function printAllPrimes(number) {
@@ -271,8 +265,8 @@ function printAllPrimes(number) {
 function addAllPrimesPlusSelf(number) {
     var allNumbers = allNumbersBefore(number);
     var array = allNumbers.filter(primeFactorization);
-    return rollingSum(array) + number;
+    return array.reduce(sum, 0) + number;
 }
 
-//console.log(printAllPrimes(67));
-//console.log(addAllPrimesPlusSelf(13));
+console.log(printAllPrimes(13));
+console.log(addAllPrimesPlusSelf(13));
