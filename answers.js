@@ -234,22 +234,17 @@ function allNumbersBefore(num) {
     return numArray;
 }
 
-function primeFactorization(integer) {
-    var originalInteger = integer;
-    var factors = [];
-    for (var i = 2; i <= integer; i++) {
-        while (integer % i === 0) {
-            factors.push(i);
-            integer /= i;
-        }
-    }
-    if (originalInteger === 2) {
+function isAPrimeNumber(integer) {
+    var upperLimit = Math.floor(Math.sqrt(integer));
+    if (integer === 1) {
         return false;
     }
-    else if (factors.length === 1) {
-        return true;
+    for (var i = 2; i <= upperLimit; i++) {
+        if (integer % i === 0) {
+            return false;
+        }
     }
-    else return false;
+    return true;
 }
 
 function sum(rollingSum, curr) {
@@ -258,15 +253,15 @@ function sum(rollingSum, curr) {
 
 function printAllPrimes(number) {
     var allNumbers = allNumbersBefore(number);
-    return allNumbers.filter(primeFactorization);
+    return allNumbers.filter(isAPrimeNumber);
 
 }
 
 function addAllPrimesPlusSelf(number) {
     var allNumbers = allNumbersBefore(number);
-    var array = allNumbers.filter(primeFactorization);
+    var array = allNumbers.filter(isAPrimeNumber);
     return array.reduce(sum, 0) + number;
 }
 
-console.log(printAllPrimes(13));
-console.log(addAllPrimesPlusSelf(13));
+//console.log(printAllPrimes(100));
+//console.log(addAllPrimesPlusSelf(100));
